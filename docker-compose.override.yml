@@ -1,0 +1,22 @@
+services:
+  dt-backend:
+    build:
+      target: development
+      args:
+        - ENVIRONMENT=development
+    volumes:
+      - ./backend:/app # バインドマウントでローカルの変更を反映
+    tty: true # 開発時のターミナル維持
+
+  dt-frontend:
+    build:
+      target: development
+      args:
+        - VUE_APP_API_URL=http://localhost:8080/api
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app # バインドマウントでローカルの変更を反映
+    tty: true # 開発時のターミナル維持
+    environment:
+      - VUE_APP_API_URL=http://localhost:8080/api

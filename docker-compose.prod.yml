@@ -1,0 +1,16 @@
+services:
+  dt-backend:
+    build:
+      target: production
+      args:
+        - ENVIRONMENT=production
+
+  dt-frontend:
+    build:
+      target: production
+      args:
+        - VUE_APP_API_URL=https://localhost:8080/api
+    ports:
+      - 5173:80
+    environment:
+      - VUE_APP_API_URL=https://localhost:8080/api

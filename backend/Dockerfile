@@ -36,7 +36,7 @@ RUN bundle exec bootsnap precompile app/ lib/
 
 
 # Final stage for app image
-FROM base
+FROM base AS production
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \

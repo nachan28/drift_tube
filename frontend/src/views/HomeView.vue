@@ -2,7 +2,11 @@
 </script>
 
 <template>
-  <SearchBar></SearchBar>
+  <div class="search-bar-wrapper"></div>
+    <SearchBar></SearchBar>
 </template>
 
-<style></style>
+<style>
+.search-bar-wrapper {
+}
+</style>

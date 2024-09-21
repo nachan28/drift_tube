@@ -35,6 +35,26 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 
+# Development stage
+FROM base AS development
+
+# Install development dependencies
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl libsqlite3-dev libvips build-essential libgmp-dev
+
+# Copy application code
+COPY . .
+
+# Install gems (including development gems)
+RUN bundle install
+
+# Expose the default Rails port for development
+EXPOSE 3000
+
+# Start the Rails server in development mode
+CMD ["./bin/rails", "server", "-p", "8080", "-b", "0.0.0.0"]
+
+
 # Final stage for app image
 FROM base AS production
 

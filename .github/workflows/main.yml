@@ -21,12 +21,12 @@ jobs:
     timeout-minutes: 20
     defaults:
       run:
-        working-directory: app
+        working-directory: /app
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Build Image and Run Tests
+      - name: Build Image
         run: |
           docker image build --target production -t temp_frontend --build-arg VUE_APP_API_URL=/api .
 
@@ -56,12 +56,12 @@ jobs:
     timeout-minutes: 20
     defaults:
       run:
-        working-directory: app
+        working-directory: /app
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Build Image and Run Tests
+      - name: Build Image
         run: |
           docker image build --target production -t temp_backend --build-arg ENVIRONMENT=production .
 

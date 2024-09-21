@@ -2,6 +2,7 @@
 </script>
 
 <template>
-  <main>
-  </main>
+  <SearchBar></SearchBar>
 </template>
+
+<style></style>

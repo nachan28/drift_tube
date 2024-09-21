@@ -2,20 +2,21 @@
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.3.0
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+ARG ENVIRONMENT
+FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
 WORKDIR /rails
 
 # Set production environment
-ENV RAILS_ENV="production" \
+ENV RAILS_ENV=$ENVIRONMENT \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development"
 
 
 # Throw-away build stage to reduce size of final image
-FROM base as build
+FROM base AS build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
@@ -55,5 +56,5 @@ USER rails:rails
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD ["./bin/rails", "server"]
+EXPOSE 8080
+CMD ["./bin/rails", "server", "-p", "8080", "-b", "0.0.0.0"]

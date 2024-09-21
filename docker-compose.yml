@@ -1,0 +1,25 @@
+services:
+  dt-backend:
+    container_name: dt-backend
+    build:
+      context: ./backend
+      args:
+        - ENVIRONMENT=development
+    ports:
+      - "8080:8080"
+    tty: true
+    volumes:
+      - ./backend:/app
+    environment:
+      - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+
+  dt-frontend:
+    container_name: dt-frontend
+    build: ./frontend
+    ports:
+      - "3000:80"
+    tty: true
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - dt-backend

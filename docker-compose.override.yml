@@ -4,6 +4,7 @@ services:
       target: development
       args:
         - ENVIRONMENT=development
+    command: bash -c "rm -f /app/tmp/pids/server.pid && exec ./bin/rails server -p 8080 -b '0.0.0.0'"
     volumes:
       - ./backend:/app # バインドマウントでローカルの変更を反映
     tty: true # 開発時のターミナル維持

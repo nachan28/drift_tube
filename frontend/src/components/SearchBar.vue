@@ -3,14 +3,32 @@
     <div class="icon-container">
       <img src="./icons/IconSearch.svg" alt="search" class="search-icon">
     </div>
-    <input type="text" class="search-input" placeholder="新しい興味の扉をオープンする">
-    <button class="submit-button">
+    <input type="text" class="search-input" placeholder="新しい興味の扉をオープンする" :v-model="searchInput">
+    <button class="submit-button" @click="onClick">
       <img src="./icons/IconSearch.svg" alt="search" class="search-icon">
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
+const searchInput = ref("")
+
+const onClick = async() => {
+  const response = await fetch('http://localhost:8080/api/embed', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      texts: searchInput.value,
+      input_type: "search_document"
+    }),
+  });
+
+  console.log(response)
+}
 </script>
 
 <style lang="scss" scoped>

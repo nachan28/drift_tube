@@ -49,11 +49,9 @@ COPY . .
 RUN bundle install
 
 # Expose the default Rails port for development
-EXPOSE 3000
+EXPOSE 8080
 
 # Start the Rails server in development mode
-CMD ["./bin/rails", "server", "-p", "8080", "-b", "0.0.0.0"]
-
 
 # Final stage for app image
 FROM base AS production
@@ -73,7 +71,7 @@ RUN useradd rails --create-home --shell /bin/bash && \
 USER rails:rails
 
 # Entrypoint prepares the database.
-ENTRYPOINT ["/app/bin/docker-entrypoint"]
+ENTRYPOINT ["bash", "-c", "rm -f /app/tmp/pids/server.pid && exec ./bin/rails server -p 8080 -b '0.0.0.0'"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 8080

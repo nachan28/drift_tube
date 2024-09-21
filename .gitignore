@@ -1,3 +1,4 @@
 /backend/tmp/
 /frontend/node_modules/
 /backend/.env
+/backend/log/development.log

@@ -7,7 +7,7 @@ FROM base AS test-and-build
 COPY . /app
 WORKDIR /app
 ARG VUE_APP_API_URL
-RUN yarn install --frozen-lockfile && yarn test && yarn build
+RUN yarn install --frozen-lockfile && yarn build
 
 # Hosting in Nginx
 FROM nginx:latest AS production

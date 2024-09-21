@@ -21,7 +21,7 @@ jobs:
     timeout-minutes: 20
     defaults:
       run:
-        working-directory: /app
+        working-directory: frontend
 
     steps:
       - uses: actions/checkout@v3
@@ -56,7 +56,7 @@ jobs:
     timeout-minutes: 20
     defaults:
       run:
-        working-directory: /app
+        working-directory: backend
 
     steps:
       - uses: actions/checkout@v3
